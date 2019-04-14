@@ -12,8 +12,8 @@ public class UIPopupLivesController : Accessible<UIPopupLivesController>
     [SerializeField] private UILabel pointerAmountLabel = null;
     [Header("Reference Buttons")]
     [SerializeField] private UIButton pointerButtonClose = null;
-    [SerializeField] private UIButton pointerButtonUseLife = null;
-    [SerializeField] private UIButton pointerButtonRefillLife = null;
+    [SerializeField] private UIButton[] pointerButtonUseLife = null;
+    [SerializeField] private UIButton[] pointerButtonRefillLife = null;
 
     private float amountLives = 0.0f;
     private float currentTime = 0.0f;
@@ -28,16 +28,22 @@ public class UIPopupLivesController : Accessible<UIPopupLivesController>
         {
             EventDelegate.Set(pointerButtonClose.onClick, delegate () { Close(); });
         }
-
-        if (pointerButtonUseLife != null)
+        for (int i = 0; i < pointerButtonUseLife.Length; i++)
         {
-            EventDelegate.Set(pointerButtonUseLife.onClick, delegate () { LoseLife(); });
+            if (pointerButtonUseLife != null)
+            {
+                EventDelegate.Set(pointerButtonUseLife[i].onClick, delegate () { LoseLife(); });
+            }
         }
 
-        if (pointerButtonUseLife != null)
+        for (int i = 0; i < pointerButtonRefillLife.Length; i++)
         {
-            EventDelegate.Set(pointerButtonRefillLife.onClick, delegate () { RefillLife(); });
+            if (pointerButtonUseLife != null)
+            {
+                EventDelegate.Set(pointerButtonRefillLife[i].onClick, delegate () { RefillLife(); });
+            }
         }
+      
     }
 
     private void Update()

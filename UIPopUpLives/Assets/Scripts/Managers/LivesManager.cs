@@ -24,7 +24,7 @@ public class LivesManager : Accessible<LivesManager> {
     // Проверка на возможность заполнить жизни
     public bool CanRefillLives()
     {
-        return currentLives < getMaxNumberOfLives(); 
+        return currentLives < getMaxNumberOfLives();
     }
 
     // Проверка на возможность отнять жизнь

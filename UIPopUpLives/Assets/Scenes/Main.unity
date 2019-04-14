@@ -1067,9 +1067,13 @@ MonoBehaviour:
   pointerTimeLabel: {fileID: 1549471243}
   pointerAmountLabel: {fileID: 1459384287}
   pointerButtonClose: {fileID: 1425870570}
-  pointerButtonUseLife: {fileID: 890218436}
-  pointerButtonRefillLife: {fileID: 2017669228}
-  isCheckFullLifes: 0
+  pointerButtonUseLife:
+  - {fileID: 703701200}
+  - {fileID: 890218436}
+  pointerButtonRefillLife:
+  - {fileID: 2017669228}
+  - {fileID: 325161497}
+  isFullLifes: 0
 --- !u!1 &598583911
 GameObject:
   m_ObjectHideFlags: 0
