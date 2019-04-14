@@ -15,18 +15,17 @@ public class UIPopupLivesController : Accessible<UIPopupLivesController>
     [SerializeField] private UIButton pointerButtonUseLife = null;
     [SerializeField] private UIButton pointerButtonRefillLife = null;
 
-    private int amountLives = 0;
-    private int startingTime = 0;
+    private float amountLives = 0.0f;
+    private float startingTime = 0.0f;
     private float currentTime = 0.0f;
+
+    private int minute = 00;
+    private int secondsInt = 0;
+    [SerializeField] private bool isFullLifes = false;
 
     private void Start()
     {
-        currentTime = startingTime;
-        amountLives = LivesManager.Current.GetCurrentLives();
-
-        pointerTimeLabel.text = currentTime.ToString();
-
-        pointerAmountLabel.text = amountLives.ToString();
+        Init();
 
         if (pointerButtonClose != null)
         {
@@ -35,7 +34,7 @@ public class UIPopupLivesController : Accessible<UIPopupLivesController>
 
         if (pointerButtonUseLife != null)
         {
-            EventDelegate.Set(pointerButtonUseLife.onClick, delegate () { MinusLife(); });
+            EventDelegate.Set(pointerButtonUseLife.onClick, delegate () { LoseLife(); });
         }
 
         if (pointerButtonUseLife != null)
@@ -48,29 +47,40 @@ public class UIPopupLivesController : Accessible<UIPopupLivesController>
     {
         if (pointerTimeLabel != null)
         {
-            string timeText = "";
-          
-            if (LivesManager.Current.CanRefillLives())
-            {
-                CheckRefillLifes();
-                currentTime += 1 * Time.deltaTime;
-                timeText = string.Format("{0:D2}:{1:D2}", 00, currentTime.ToString("##"));
-            }
-            else
-            {
-                timeText = GameManager.Current.formatTimeLiveRessurection;
-            }
-            pointerTimeLabel.text = timeText;
+            string timeText;
+         //   if (!isFullLifes)
+         //   {
+                if (LivesManager.Current.CanRefillLives())
+                {
+                    CheckRefillLifes();
+
+                     // currentTime += 1 * Time.deltaTime;
+                    //  timeText = string.Format("{0:D2}:{1:D2}", 00, currentTime.ToString("##"));
+                    startingTime = Time.time;
+                    secondsInt = (int)startingTime % 60;
+               // currentTime = secondsInt;
+                timeText = string.Format("{0:D2}:{1:D2}", minute, secondsInt);
+             
+                    print("currentTime ********** " + secondsInt);
+                
+                }
+                else
+                {
+                    timeText = Config.TEXT_FULL_LIVES;
+                    print("-------");
+                }
+                pointerTimeLabel.text = timeText;
+           // }
         }
     }
 
-    private void CheckRefillLifes()
+    // Инициализация данных
+    private void Init()
     {
-        if (currentTime >= 5.0f)
-        {
-            LivesManager.Current.RefillOneLife();
-            currentTime = 0.0f;
-        }
+        currentTime = (int)startingTime;
+        amountLives = LivesManager.Current.GetCurrentLives();
+        pointerTimeLabel.text = secondsInt.ToString();
+        pointerAmountLabel.text = amountLives.ToString();
     }
 
     public void Show()
@@ -78,13 +88,17 @@ public class UIPopupLivesController : Accessible<UIPopupLivesController>
         pointerSwitcher.gameObject.SetActive(true);
 
         // Условия по которому определяется вызов необходимого содержания окна
-        //  popUpsUseLife.gameObject.active = !popUpsUseLife.gameObject.active;
         popUpsUseAndRefillLife.gameObject.SetActive(true);
 
-        if (amountLives <= 0)
+        if (LivesManager.Current.IsFullLives)
         {
             print("Полные жизни, выводим FULL");
         }
+
+       /* if (amountLives <= 0)
+        {
+            print("Полные жизни, выводим FULL");
+        }*/
     }
 
     public void Close()
@@ -92,11 +106,30 @@ public class UIPopupLivesController : Accessible<UIPopupLivesController>
         pointerSwitcher.gameObject.SetActive(false);
     }
 
+    // Добавляем 1 жизнь каждые 20 секунд
+    private void CheckRefillLifes()
+    {
+        if (secondsInt >= Config.REFILL_LIFE_SECONDS)
+        {
+            isFullLifes = true;
+          
+            currentTime = 0;
+            secondsInt = 0;
+            startingTime = 0;
+            LivesManager.Current.RefillOneLife();
+        }
+        else {
+            print("gfdsge");
+
+        }
+    }
+
+    // Обновляет данные жизней
     private void UpdateLives()
     {
         int countLives = LivesManager.Current.GetCurrentLives();
 
-        if (countLives < GameManager.MAX_LIVES)
+        if (countLives < Config.MAX_LIVES)
         {
             print("В popUp жизни закончились");
             pointerAmountLabel.text = countLives.ToString();
@@ -104,32 +137,34 @@ public class UIPopupLivesController : Accessible<UIPopupLivesController>
 
         if (countLives <= 0)
         {
-            print("В popUp жизни закончились");
+            print("В popUp жизни закончились " + countLives);
         }
         else
         {
-            print("В popUp жизни не закончились");
+            print("В popUp жизни не закончились " + countLives);
             pointerAmountLabel.text = countLives.ToString();
-
         }
+    }
+
+    // Отнимает одну жизнь
+    private void LoseLife()
+    { 
+        if (LivesManager.Current.CanLoseLife())
+        {
+            isFullLifes = false;
+            LivesManager.Current.LoseOneLife();
+        }
+    }
+
+    // Восполнить все жизни
+    private void RefillLife()
+    {
+        LivesManager.Current.RefillAllLife();
     }
 
     private void OnProfileChangeLives(int lives)
     {
         UpdateLives();
-    }
-
-    private void MinusLife()
-    {
-        if (amountLives != 0)
-        {
-            LivesManager.Current.LooseOneLife();
-        }
-    }
-
-    private void RefillLife()
-    {
-        LivesManager.Current.RefillAllLife();
     }
 
     private void OnEnable()

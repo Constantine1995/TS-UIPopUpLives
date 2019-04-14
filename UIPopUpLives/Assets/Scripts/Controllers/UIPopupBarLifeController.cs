@@ -9,11 +9,11 @@ public class UIPopupBarLifeController : MonoBehaviour
     {
         if (pointerButtonLifeBar != null)
         {
-            EventDelegate.Set(pointerButtonLifeBar.onClick, delegate () { OpenPopUp(); });
+            EventDelegate.Set(pointerButtonLifeBar.onClick, delegate () { Show(); });
         }
     }
 
-    public void OpenPopUp()
+    public void Show()
     {
         UIPopupLivesController.Current.Show();
     }
