@@ -16,11 +16,8 @@ public class UIPopupLivesController : Accessible<UIPopupLivesController>
     [SerializeField] private UIButton pointerButtonRefillLife = null;
 
     private float amountLives = 0.0f;
-    private float startingTime = 0.0f;
     private float currentTime = 0.0f;
 
-    private int minute = 00;
-    private int secondsInt = 0;
     [SerializeField] private bool isFullLifes = false;
 
     private void Start()
@@ -48,38 +45,35 @@ public class UIPopupLivesController : Accessible<UIPopupLivesController>
         if (pointerTimeLabel != null)
         {
             string timeText;
-         //   if (!isFullLifes)
-         //   {
                 if (LivesManager.Current.CanRefillLives())
                 {
                     CheckRefillLifes();
 
-                     // currentTime += 1 * Time.deltaTime;
-                    //  timeText = string.Format("{0:D2}:{1:D2}", 00, currentTime.ToString("##"));
-                    startingTime = Time.time;
-                    secondsInt = (int)startingTime % 60;
-               // currentTime = secondsInt;
-                timeText = string.Format("{0:D2}:{1:D2}", minute, secondsInt);
-             
-                    print("currentTime ********** " + secondsInt);
-                
+
+                currentTime += 1 * Time.deltaTime;
+
+                // Используется в качестве заглушки, после 20 секунд таймер обновляется до 0 секунд
+                string minutes = Mathf.Floor((currentTime % 3600) / 60).ToString("00"); 
+
+                string seconds = (currentTime % 60).ToString("00");
+
+                timeText = string.Format("{0:D2}:{1:D2}", minutes, seconds);
+
                 }
                 else
                 {
                     timeText = Config.TEXT_FULL_LIVES;
-                    print("-------");
                 }
+
                 pointerTimeLabel.text = timeText;
-           // }
         }
     }
 
     // Инициализация данных
     private void Init()
     {
-        currentTime = (int)startingTime;
         amountLives = LivesManager.Current.GetCurrentLives();
-        pointerTimeLabel.text = secondsInt.ToString();
+        pointerTimeLabel.text = currentTime.ToString();
         pointerAmountLabel.text = amountLives.ToString();
     }
 
@@ -109,18 +103,10 @@ public class UIPopupLivesController : Accessible<UIPopupLivesController>
     // Добавляем 1 жизнь каждые 20 секунд
     private void CheckRefillLifes()
     {
-        if (secondsInt >= Config.REFILL_LIFE_SECONDS)
+        if (currentTime >= Config.REFILL_LIFE_SECONDS)
         {
-            isFullLifes = true;
-          
-            currentTime = 0;
-            secondsInt = 0;
-            startingTime = 0;
-            LivesManager.Current.RefillOneLife();
-        }
-        else {
-            print("gfdsge");
-
+           currentTime = 0;
+           LivesManager.Current.RefillOneLife();
         }
     }
 
@@ -151,7 +137,6 @@ public class UIPopupLivesController : Accessible<UIPopupLivesController>
     { 
         if (LivesManager.Current.CanLoseLife())
         {
-            isFullLifes = false;
             LivesManager.Current.LoseOneLife();
         }
     }
