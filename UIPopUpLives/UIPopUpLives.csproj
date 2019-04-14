@@ -341,6 +341,9 @@
     <Compile Include="Assets\Libraries\GUI\Scripts\UI\UITexture.cs" />
     <Compile Include="Assets\Libraries\GUI\Scripts\UI\UITooltip.cs" />
     <Compile Include="Assets\Libraries\GUI\Scripts\UI\UIViewport.cs" />
+    <Compile Include="Assets\Scripts\Controllers\UIPopupBarLifeController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\UIPopupLivesController.cs" />
+    <Compile Include="Assets\Scripts\Core\Patterns\Accessible.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\GUI\Resources\Shaders\Unlit - Premultiplied Colored (TextureClip).shader" />
