@@ -344,6 +344,8 @@
     <Compile Include="Assets\Scripts\Controllers\UIPopupBarLifeController.cs" />
     <Compile Include="Assets\Scripts\Controllers\UIPopupLivesController.cs" />
     <Compile Include="Assets\Scripts\Core\Patterns\Accessible.cs" />
+    <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\LivesManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\GUI\Resources\Shaders\Unlit - Premultiplied Colored (TextureClip).shader" />

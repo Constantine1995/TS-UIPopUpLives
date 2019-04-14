@@ -1064,7 +1064,12 @@ MonoBehaviour:
   popUpsUseLife: {fileID: 218051357}
   popUpsRefillLife: {fileID: 271361034}
   popUpsUseAndRefillLife: {fileID: 1737237533}
+  pointerTimeLabel: {fileID: 1549471243}
+  pointerAmountLabel: {fileID: 1459384287}
   pointerButtonClose: {fileID: 1425870570}
+  pointerButtonUseLife: {fileID: 890218436}
+  pointerButtonRefillLife: {fileID: 2017669228}
+  isCheckFullLifes: 0
 --- !u!1 &598583911
 GameObject:
   m_ObjectHideFlags: 0
@@ -2497,7 +2502,7 @@ MonoBehaviour:
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 1b29c333e93f76e47a4755891bfc675a, type: 3}
   mFont: {fileID: 0}
-  mText: 4
+  mText: 0
   mFontSize: 27
   mFontStyle: 0
   mAlignment: 0
@@ -2691,7 +2696,7 @@ MonoBehaviour:
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 1b29c333e93f76e47a4755891bfc675a, type: 3}
   mFont: {fileID: 0}
-  mText: 00:15
+  mText: 00:00
   mFontSize: 20
   mFontStyle: 0
   mAlignment: 2
