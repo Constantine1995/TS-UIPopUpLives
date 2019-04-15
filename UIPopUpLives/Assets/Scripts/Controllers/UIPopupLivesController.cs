@@ -2,26 +2,6 @@
 
 public class UIPopupLivesController : Accessible<UIPopupLivesController>
 {
-    [Header("Reference UI")]
-    [SerializeField] private Transform pointerSwitcher = null;
-    [SerializeField] private Transform popUpsUseLife = null;
-    [SerializeField] private Transform popUpsRefillLife = null;
-    [SerializeField] private Transform popUpsUseAndRefillLife = null;
-    [Header("Reference Label")]
-    [SerializeField] private UILabel pointerTimeBarLabel = null;
-    [SerializeField] private UILabel pointerAmountLifeBarLabel = null;
-    [SerializeField] private UILabel pointerUseAndRefillTimeLabel = null;
-    [SerializeField] private UILabel pointerUseAndRefillAmountLabel = null;
-    [Header("Reference Buttons")]
-    [SerializeField] private UIButton pointerButtonClose = null;
-    [SerializeField] private UIButton[] pointerButtonUseLife = null;
-    [SerializeField] private UIButton[] pointerButtonRefillLife = null;
-
-    private float amountLives = 0.0f;
-    private float currentTime = 0.0f;
-
-    [SerializeField] private bool isFullLifes = false;
-
     enum PopUpState { UseLife, RefillLife, UseRefillLife }
 
     PopUpState currentState;
@@ -30,6 +10,33 @@ public class UIPopupLivesController : Accessible<UIPopupLivesController>
     {
         currentState = state;
     }
+
+    [Header("Reference UI")]
+    [SerializeField] private Transform pointerSwitcher = null;
+    [SerializeField] private Transform popUpsUseLife = null;
+    [SerializeField] private Transform popUpsRefillLife = null;
+    [SerializeField] private Transform popUpsUseAndRefillLife = null;
+    [Header("Reference Label")]
+    [SerializeField] private UILabel pointerTimeBarLabel = null;
+    [SerializeField] private UILabel pointerAmountLifeBarLabel = null;
+
+    // Таймер
+    [SerializeField] private UILabel pointerUseAndRefillTimeLabel = null;
+    [SerializeField] private UILabel pointerRefillTimeLabel = null;
+
+    // Количество жизней
+    [SerializeField] private UILabel pointerRefillAmountLabel = null;
+    [SerializeField] private UILabel pointerUseAndRefillAmountLabel = null;
+
+    [Header("Reference Buttons")]
+    [SerializeField] private UIButton pointerButtonClose = null;
+    [SerializeField] private UIButton[] pointerButtonUseLife = null;
+    [SerializeField] private UIButton[] pointerButtonRefillLife = null;
+
+    private int amountLives = 0;
+    private float currentTime = 0.0f;
+
+    string minutes, seconds;
 
     private void Start()
     {
@@ -55,29 +62,28 @@ public class UIPopupLivesController : Accessible<UIPopupLivesController>
                 EventDelegate.Set(pointerButtonRefillLife[i].onClick, delegate () { RefillLife(); });
             }
         }
-      
     }
 
     private void Update()
     {
-        SwichState();
         if (pointerTimeBarLabel != null)
         {
+            SwichState();
+
             string timeText;
+
                 if (LivesManager.Current.CanRefillLives())
                 {
                     CheckRefillLifes();
 
+                    currentTime += 1 * Time.deltaTime;
 
-                currentTime += 1 * Time.deltaTime;
+                    // Используется в качестве заглушки, после 20 секунд, таймер обновляется до 0 секунд
+                    minutes = Mathf.Floor((currentTime % 3600) / 60).ToString("00"); 
 
-                // Используется в качестве заглушки, после 20 секунд, таймер обновляется до 0 секунд
-                string minutes = Mathf.Floor((currentTime % 3600) / 60).ToString("00"); 
+                    seconds = (currentTime % 60).ToString("00");
 
-                string seconds = (currentTime % 60).ToString("00");
-
-                timeText = string.Format("{0:D2}:{1:D2}", minutes, seconds);
-
+                    timeText = CustomFormatTime.formatTimeLive(minutes, seconds);
                 }
                 else
                 {
@@ -86,7 +92,6 @@ public class UIPopupLivesController : Accessible<UIPopupLivesController>
 
                 pointerTimeBarLabel.text = timeText;
         }
-       
     }
 
     // Инициализация данных
@@ -103,13 +108,18 @@ public class UIPopupLivesController : Accessible<UIPopupLivesController>
         pointerSwitcher.gameObject.SetActive(true);
         ChangeState();
     }
-
+    
     private void SwichState()
     {
+       int countLives = LivesManager.Current.GetCurrentLives();
+
         switch (currentState)
         {
             // Обычное состояние
             case PopUpState.UseRefillLife:
+                pointerUseAndRefillAmountLabel.text = countLives.ToString();
+                pointerUseAndRefillTimeLabel.text = CustomFormatTime.formatTimeLive(minutes, seconds);
+
                 popUpsUseAndRefillLife.gameObject.SetActive(true);
                 popUpsRefillLife.gameObject.SetActive(false);
                 popUpsUseLife.gameObject.SetActive(false);
@@ -117,6 +127,9 @@ public class UIPopupLivesController : Accessible<UIPopupLivesController>
 
             // Нету жизней
             case PopUpState.RefillLife:
+                pointerRefillAmountLabel.text = countLives.ToString();
+                pointerRefillTimeLabel.text = CustomFormatTime.formatTimeLive(minutes, seconds);
+
                 popUpsRefillLife.gameObject.SetActive(true);
                 popUpsUseLife.gameObject.SetActive(false);
                 popUpsUseAndRefillLife.gameObject.SetActive(false);

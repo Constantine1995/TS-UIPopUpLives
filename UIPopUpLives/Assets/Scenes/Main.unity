@@ -947,7 +947,7 @@ Transform:
   m_GameObject: {fileID: 535422351}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.0045871558, y: 0.0045871558, z: 0.0045871558}
+  m_LocalScale: {x: 0.0056338026, y: 0.0056338026, z: 0.0056338026}
   m_Children:
   - {fileID: 305383934}
   m_Father: {fileID: 0}
@@ -1066,8 +1066,10 @@ MonoBehaviour:
   popUpsUseAndRefillLife: {fileID: 1737237533}
   pointerTimeBarLabel: {fileID: 1549471243}
   pointerAmountLifeBarLabel: {fileID: 1459384287}
-  pointerUseAndRefillTimeLabel: {fileID: 0}
-  pointerUseAndRefillAmountLabel: {fileID: 0}
+  pointerUseAndRefillTimeLabel: {fileID: 1420693867}
+  pointerRefillAmountLabel: {fileID: 1584632209}
+  pointerRefillTimeLabel: {fileID: 2069001744}
+  pointerUseAndRefillAmountLabel: {fileID: 2116731790}
   pointerButtonClose: {fileID: 1425870570}
   pointerButtonUseLife:
   - {fileID: 703701200}
@@ -1499,7 +1501,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 888951466}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -372, y: 209, z: 0}
+  m_LocalPosition: {x: -303, y: 170, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 100315957}

@@ -344,6 +344,7 @@
     <Compile Include="Assets\Scripts\Config\Config.cs" />
     <Compile Include="Assets\Scripts\Controllers\UIPopupBarLifeController.cs" />
     <Compile Include="Assets\Scripts\Controllers\UIPopupLivesController.cs" />
+    <Compile Include="Assets\Scripts\Core\CustomFormatTime.cs" />
     <Compile Include="Assets\Scripts\Core\Patterns\Accessible.cs" />
     <Compile Include="Assets\Scripts\Managers\LivesManager.cs" />
   </ItemGroup>
