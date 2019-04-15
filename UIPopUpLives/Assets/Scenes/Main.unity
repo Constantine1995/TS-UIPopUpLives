@@ -441,7 +441,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &188191315
 Transform:
   m_ObjectHideFlags: 0
@@ -824,7 +824,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 334896268}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -500, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 130012894}
@@ -965,14 +965,14 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 630
-  mHeight: 349
+  mWidth: 622
+  mHeight: 344
   mDepth: 0
   mMat: {fileID: 0}
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1.8051575
+  aspectRatio: 1.8081396
   mType: 1
   mFillDirection: 4
   mFillAmount: 1
@@ -1056,7 +1056,7 @@ Transform:
   m_GameObject: {fileID: 535422351}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.0057306592, y: 0.0057306592, z: 0.0057306592}
+  m_LocalScale: {x: 0.0058139535, y: 0.0058139535, z: 0.0058139535}
   m_Children:
   - {fileID: 305383934}
   m_Father: {fileID: 0}
@@ -1174,6 +1174,7 @@ MonoBehaviour:
   popUpsUseLife: {fileID: 218051357}
   popUpsRefillLife: {fileID: 271361034}
   popUpsUseAndRefillLife: {fileID: 1737237533}
+  BackgroundFade: {fileID: 1814527731}
   pointerTimeBarLabel: {fileID: 1549471243}
   pointerAmountLifeBarLabel: {fileID: 1459384287}
   pointerUseAndRefillTimeLabel: {fileID: 1420693867}
@@ -1610,7 +1611,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 888951466}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -298, y: 168, z: 0}
+  m_LocalPosition: {x: -294, y: 165, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 100315957}
@@ -1735,7 +1736,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 890218434}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: -52, z: 0}
+  m_LocalPosition: {x: 0, y: -130, z: 0}
   m_LocalScale: {x: 0.99971974, y: 0.99971974, z: 0.99971974}
   m_Children:
   - {fileID: 1222852012}
@@ -2968,7 +2969,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1814527730
 Transform:
   m_ObjectHideFlags: 0
@@ -3021,13 +3022,13 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3004
+  startingRenderQueue: 3002
   mClipTexture: {fileID: 0}
-  mAlpha: 0.5
+  mAlpha: 0
   mClipping: 0
   mClipRange: {x: 0, y: 0, z: 300, w: 200}
   mClipSoftness: {x: 4, y: 4}
-  mDepth: 2
+  mDepth: 0
   mSortingOrder: 0
   mSortingLayerName: 
   mClipOffset: {x: 0, y: 0}
@@ -3224,7 +3225,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2017669226}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: -109, z: 0}
+  m_LocalPosition: {x: 0, y: -270, z: 0}
   m_LocalScale: {x: 0.99971974, y: 0.99971974, z: 0.99971974}
   m_Children:
   - {fileID: 1288059640}

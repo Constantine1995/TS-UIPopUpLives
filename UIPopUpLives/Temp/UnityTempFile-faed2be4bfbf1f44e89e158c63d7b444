@@ -276,7 +276,7 @@ Assets/Scripts/Core/CustomFormatTime.cs
 Assets/Scripts/Core/Patterns/Accessible.cs
 Assets/Scripts/Managers/LivesManager.cs
 Assets/Scripts/UI/Popups/UIPopupBarLife.cs
-Assets/Scripts/UI/Popups/UIPopupLivesController.cs
+Assets/Scripts/UI/Popups/UIPopupLives.cs
 -r:"C:\Program Files\unity2017.4.7\Editor\Data\Mono\lib\mono\unity\System.Runtime.Serialization.dll"
 -r:"C:\Program Files\unity2017.4.7\Editor\Data\Mono\lib\mono\unity\System.Xml.Linq.dll"
 -r:"C:\Program Files\unity2017.4.7\Editor\Data\Mono\lib\mono\unity\UnityScript.dll"

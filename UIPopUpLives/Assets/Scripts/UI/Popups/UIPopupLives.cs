@@ -18,6 +18,7 @@ public class UIPopupLives : Accessible<UIPopupLives>
     [SerializeField] private Transform popUpsUseLife = null;
     [SerializeField] private Transform popUpsRefillLife = null;
     [SerializeField] private Transform popUpsUseAndRefillLife = null;
+    [SerializeField] private UIPanel BackgroundFade = null;
     [Header("Reference Label")]
     [SerializeField] private UILabel pointerTimeBarLabel = null;
     [SerializeField] private UILabel pointerAmountLifeBarLabel = null;
@@ -135,11 +136,25 @@ public class UIPopupLives : Accessible<UIPopupLives>
 
     public void Show()
     {
+  
         pointerSwitcher.gameObject.SetActive(true);
+        FadeBackground(0.5f);
         ChangeState();
         StartCoroutine(Process(true));
     }
-    
+
+    public void Close()
+    {
+        FadeBackground(0.0f);
+        StartCoroutine(Process(false));
+    }
+
+    private void FadeBackground(float alpha)
+    {
+        float animationLength = currentAnimator.GetCurrentAnimatorStateInfo(0).length;
+        TweenAlpha.Begin(BackgroundFade.gameObject, animationLength, alpha);
+    }
+
     private void SwichState()
     {
        int countLives = LivesManager.Current.GetCurrentLives();
@@ -196,11 +211,6 @@ public class UIPopupLives : Accessible<UIPopupLives>
             SetCurrentState(PopUpState.UseLife);
         }
      }
-
-    public void Close()
-    {
-        StartCoroutine(Process(false));
-    }
 
     // Добавляем 1 жизнь каждые 20 секунд
     private void CheckRefillLifes()
