@@ -21,6 +21,24 @@ public class LivesManager : Accessible<LivesManager> {
         }
     }
 
+    // Проверка на полное отсутствие жизней
+    public bool IsNoLives
+    {
+        get
+        {
+            return currentLives == 0;
+        }
+    }
+
+    // Обычное состяоние для pop-up Use Refil Life
+    public bool IsNormalState
+    {
+        get
+        {
+            return !IsNoLives && !IsFullLives;
+        }
+    }
+
     // Проверка на возможность заполнить жизни
     public bool CanRefillLives()
     {

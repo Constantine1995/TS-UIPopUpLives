@@ -736,7 +736,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 325161495}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1, y: -102, z: 0}
+  m_LocalPosition: {x: 1, y: -109, z: 0}
   m_LocalScale: {x: 0.99876004, y: 0.99876004, z: 0.99876004}
   m_Children:
   - {fileID: 1938050186}
@@ -947,7 +947,7 @@ Transform:
   m_GameObject: {fileID: 535422351}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.0049261083, y: 0.0049261083, z: 0.0049261083}
+  m_LocalScale: {x: 0.0045871558, y: 0.0045871558, z: 0.0045871558}
   m_Children:
   - {fileID: 305383934}
   m_Father: {fileID: 0}
@@ -1064,8 +1064,10 @@ MonoBehaviour:
   popUpsUseLife: {fileID: 218051357}
   popUpsRefillLife: {fileID: 271361034}
   popUpsUseAndRefillLife: {fileID: 1737237533}
-  pointerTimeLabel: {fileID: 1549471243}
-  pointerAmountLabel: {fileID: 1459384287}
+  pointerTimeBarLabel: {fileID: 1549471243}
+  pointerAmountLifeBarLabel: {fileID: 1459384287}
+  pointerUseAndRefillTimeLabel: {fileID: 0}
+  pointerUseAndRefillAmountLabel: {fileID: 0}
   pointerButtonClose: {fileID: 1425870570}
   pointerButtonUseLife:
   - {fileID: 703701200}
@@ -1497,7 +1499,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 888951466}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -347, y: 194, z: 0}
+  m_LocalPosition: {x: -372, y: 209, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 100315957}
@@ -1622,7 +1624,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 890218434}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -51.04901, z: 0}
+  m_LocalPosition: {x: 1, y: -52, z: 0}
   m_LocalScale: {x: 0.99971974, y: 0.99971974, z: 0.99971974}
   m_Children:
   - {fileID: 1222852012}
@@ -1670,7 +1672,7 @@ MonoBehaviour:
   container: {fileID: 0}
   side: 7
   runOnlyOnce: 1
-  relativeOffset: {x: 0, y: 0.33}
+  relativeOffset: {x: 0, y: 0.38}
   pixelOffset: {x: 0, y: 0}
   widgetContainer: {fileID: 0}
 --- !u!65 &890218438
@@ -3089,7 +3091,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2017669226}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -105.1009, z: 0}
+  m_LocalPosition: {x: 1, y: -109, z: 0}
   m_LocalScale: {x: 0.99971974, y: 0.99971974, z: 0.99971974}
   m_Children:
   - {fileID: 1288059640}
@@ -3137,7 +3139,7 @@ MonoBehaviour:
   container: {fileID: 0}
   side: 7
   runOnlyOnce: 1
-  relativeOffset: {x: 0, y: 0.15}
+  relativeOffset: {x: 0, y: 0.25}
   pixelOffset: {x: 0, y: 0}
   widgetContainer: {fileID: 0}
 --- !u!65 &2017669230

@@ -8,8 +8,10 @@ public class UIPopupLivesController : Accessible<UIPopupLivesController>
     [SerializeField] private Transform popUpsRefillLife = null;
     [SerializeField] private Transform popUpsUseAndRefillLife = null;
     [Header("Reference Label")]
-    [SerializeField] private UILabel pointerTimeLabel = null;
-    [SerializeField] private UILabel pointerAmountLabel = null;
+    [SerializeField] private UILabel pointerTimeBarLabel = null;
+    [SerializeField] private UILabel pointerAmountLifeBarLabel = null;
+    [SerializeField] private UILabel pointerUseAndRefillTimeLabel = null;
+    [SerializeField] private UILabel pointerUseAndRefillAmountLabel = null;
     [Header("Reference Buttons")]
     [SerializeField] private UIButton pointerButtonClose = null;
     [SerializeField] private UIButton[] pointerButtonUseLife = null;
@@ -20,6 +22,15 @@ public class UIPopupLivesController : Accessible<UIPopupLivesController>
 
     [SerializeField] private bool isFullLifes = false;
 
+    enum PopUpState { UseLife, RefillLife, UseRefillLife }
+
+    PopUpState currentState;
+
+    private void SetCurrentState(PopUpState state)
+    {
+        currentState = state;
+    }
+
     private void Start()
     {
         Init();
@@ -28,6 +39,7 @@ public class UIPopupLivesController : Accessible<UIPopupLivesController>
         {
             EventDelegate.Set(pointerButtonClose.onClick, delegate () { Close(); });
         }
+
         for (int i = 0; i < pointerButtonUseLife.Length; i++)
         {
             if (pointerButtonUseLife != null)
@@ -48,7 +60,8 @@ public class UIPopupLivesController : Accessible<UIPopupLivesController>
 
     private void Update()
     {
-        if (pointerTimeLabel != null)
+        SwichState();
+        if (pointerTimeBarLabel != null)
         {
             string timeText;
                 if (LivesManager.Current.CanRefillLives())
@@ -58,7 +71,7 @@ public class UIPopupLivesController : Accessible<UIPopupLivesController>
 
                 currentTime += 1 * Time.deltaTime;
 
-                // Используется в качестве заглушки, после 20 секунд таймер обновляется до 0 секунд
+                // Используется в качестве заглушки, после 20 секунд, таймер обновляется до 0 секунд
                 string minutes = Mathf.Floor((currentTime % 3600) / 60).ToString("00"); 
 
                 string seconds = (currentTime % 60).ToString("00");
@@ -71,35 +84,74 @@ public class UIPopupLivesController : Accessible<UIPopupLivesController>
                     timeText = Config.TEXT_FULL_LIVES;
                 }
 
-                pointerTimeLabel.text = timeText;
+                pointerTimeBarLabel.text = timeText;
         }
+       
     }
 
     // Инициализация данных
     private void Init()
     {
+        SetCurrentState(PopUpState.UseLife);
         amountLives = LivesManager.Current.GetCurrentLives();
-        pointerTimeLabel.text = currentTime.ToString();
-        pointerAmountLabel.text = amountLives.ToString();
+        pointerTimeBarLabel.text = currentTime.ToString();
+        pointerAmountLifeBarLabel.text = amountLives.ToString();
     }
 
     public void Show()
     {
         pointerSwitcher.gameObject.SetActive(true);
+        ChangeState();
+    }
 
-        // Условия по которому определяется вызов необходимого содержания окна
-        popUpsUseAndRefillLife.gameObject.SetActive(true);
-
-        if (LivesManager.Current.IsFullLives)
+    private void SwichState()
+    {
+        switch (currentState)
         {
-            print("Полные жизни, выводим FULL");
+            // Обычное состояние
+            case PopUpState.UseRefillLife:
+                popUpsUseAndRefillLife.gameObject.SetActive(true);
+                popUpsRefillLife.gameObject.SetActive(false);
+                popUpsUseLife.gameObject.SetActive(false);
+            break;
+
+            // Нету жизней
+            case PopUpState.RefillLife:
+                popUpsRefillLife.gameObject.SetActive(true);
+                popUpsUseLife.gameObject.SetActive(false);
+                popUpsUseAndRefillLife.gameObject.SetActive(false);
+            break;
+
+            // Максимум жизней
+            case PopUpState.UseLife:
+                currentTime = 0;
+                popUpsUseLife.gameObject.SetActive(true);
+                popUpsRefillLife.gameObject.SetActive(false);
+                popUpsUseAndRefillLife.gameObject.SetActive(false);
+            break;
+        }
+    }
+
+    private void ChangeState()
+    {
+        // Обычное состояние
+        if (LivesManager.Current.IsNormalState)
+        {
+            SetCurrentState(PopUpState.UseRefillLife);
         }
 
-       /* if (amountLives <= 0)
+        // Нету жизней
+        if (LivesManager.Current.IsNoLives)
         {
-            print("Полные жизни, выводим FULL");
-        }*/
-    }
+            SetCurrentState(PopUpState.RefillLife);
+        }
+
+        // Максимум жизней
+        if (LivesManager.Current.IsFullLives)
+        {
+            SetCurrentState(PopUpState.UseLife);
+        }
+     }
 
     public void Close()
     {
@@ -111,8 +163,8 @@ public class UIPopupLivesController : Accessible<UIPopupLivesController>
     {
         if (currentTime >= Config.REFILL_LIFE_SECONDS)
         {
-           currentTime = 0;
-           LivesManager.Current.RefillOneLife();
+            currentTime = 0;
+            LivesManager.Current.RefillOneLife();
         }
     }
 
@@ -120,22 +172,9 @@ public class UIPopupLivesController : Accessible<UIPopupLivesController>
     private void UpdateLives()
     {
         int countLives = LivesManager.Current.GetCurrentLives();
+        pointerAmountLifeBarLabel.text = countLives.ToString();
 
-        if (countLives < Config.MAX_LIVES)
-        {
-            print("В popUp жизни закончились");
-            pointerAmountLabel.text = countLives.ToString();
-        }
-
-        if (countLives <= 0)
-        {
-            print("В popUp жизни закончились " + countLives);
-        }
-        else
-        {
-            print("В popUp жизни не закончились " + countLives);
-            pointerAmountLabel.text = countLives.ToString();
-        }
+        ChangeState();
     }
 
     // Отнимает одну жизнь
