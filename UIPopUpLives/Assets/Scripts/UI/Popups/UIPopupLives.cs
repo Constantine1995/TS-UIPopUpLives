@@ -66,6 +66,12 @@ public class UIPopupLives : Accessible<UIPopupLives>
                 EventDelegate.Set(pointerButtonRefillLife[i].onClick, delegate () { RefillLife(); });
             }
         }
+
+
+            if (BackgroundFade != null)
+            {
+                EventDelegate.Set(BackgroundFade.GetComponent<UIButton>().onClick, delegate () { ClickBackground(); });
+            }
     }
 
     private void Update()
@@ -148,6 +154,11 @@ public class UIPopupLives : Accessible<UIPopupLives>
     {
         FadeBackground(0.0f);
         StartCoroutine(Process(false));
+    }
+
+    private void ClickBackground()
+    {
+        Close();
     }
 
     private void FadeBackground(float alpha)
