@@ -28,6 +28,7 @@ public class UIPopupLives : Accessible<UIPopupLives>
     [SerializeField] private UILabel pointerRefillTimeLabel = null;
 
     // Количество жизней
+    [SerializeField] private UILabel pointerUseAmountLabel = null;
     [SerializeField] private UILabel pointerRefillAmountLabel = null;
     [SerializeField] private UILabel pointerUseAndRefillAmountLabel = null;
 
@@ -184,6 +185,7 @@ public class UIPopupLives : Accessible<UIPopupLives>
             // Максимум жизней
             case PopUpState.UseLife:
                 currentTime = 0;
+                pointerUseAmountLabel.text = countLives.ToString();
                 popUpsUseLife.gameObject.SetActive(true);
                 popUpsRefillLife.gameObject.SetActive(false);
                 popUpsUseAndRefillLife.gameObject.SetActive(false);
