@@ -67,11 +67,10 @@ public class UIPopupLives : Accessible<UIPopupLives>
             }
         }
 
-
-            if (BackgroundFade != null)
-            {
-                EventDelegate.Set(BackgroundFade.GetComponent<UIButton>().onClick, delegate () { ClickBackground(); });
-            }
+        if (BackgroundFade != null)
+        {
+            EventDelegate.Set(BackgroundFade.GetComponent<UIButton>().onClick, delegate () { ClickBackground(); });
+        }
     }
 
     private void Update()
