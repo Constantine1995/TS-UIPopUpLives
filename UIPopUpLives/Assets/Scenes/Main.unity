@@ -441,7 +441,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &188191315
 Transform:
   m_ObjectHideFlags: 0
@@ -808,6 +808,7 @@ GameObject:
   m_Component:
   - component: {fileID: 334896269}
   - component: {fileID: 334896270}
+  - component: {fileID: 334896271}
   m_Layer: 5
   m_Name: MainPopUp
   m_TagString: Untagged
@@ -822,7 +823,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 334896268}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -500, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 130012894}
@@ -887,6 +888,23 @@ MonoBehaviour:
   mAtlas: {fileID: 114067772744298682, guid: 40c6d94365f5e114ca46b92b2a3f0bf2, type: 2}
   mSpriteName: small-pop-background
   mFillCenter: 1
+--- !u!95 &334896271
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 334896268}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2da584aa733545143af26a5755371378, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &535422351
 GameObject:
   m_ObjectHideFlags: 0
@@ -947,11 +965,11 @@ Transform:
   m_GameObject: {fileID: 535422351}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.0056338026, y: 0.0056338026, z: 0.0056338026}
+  m_LocalScale: {x: 0.0057471264, y: 0.0057471264, z: 0.0057471264}
   m_Children:
   - {fileID: 305383934}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &590428642
 GameObject:
@@ -965,7 +983,7 @@ GameObject:
   - component: {fileID: 590428645}
   - component: {fileID: 590428646}
   m_Layer: 5
-  m_Name: UIPopupLivesController
+  m_Name: UIPopupLives
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1060,6 +1078,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eb562dc5b20f6a4d9c5b01b6d42fdd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentAnimator: {fileID: 334896271}
   pointerSwitcher: {fileID: 188191315}
   popUpsUseLife: {fileID: 218051357}
   popUpsRefillLife: {fileID: 271361034}
@@ -1067,8 +1086,8 @@ MonoBehaviour:
   pointerTimeBarLabel: {fileID: 1549471243}
   pointerAmountLifeBarLabel: {fileID: 1459384287}
   pointerUseAndRefillTimeLabel: {fileID: 1420693867}
-  pointerRefillAmountLabel: {fileID: 1584632209}
   pointerRefillTimeLabel: {fileID: 2069001744}
+  pointerRefillAmountLabel: {fileID: 1584632209}
   pointerUseAndRefillAmountLabel: {fileID: 2116731790}
   pointerButtonClose: {fileID: 1425870570}
   pointerButtonUseLife:
@@ -1077,7 +1096,6 @@ MonoBehaviour:
   pointerButtonRefillLife:
   - {fileID: 2017669228}
   - {fileID: 325161497}
-  isFullLifes: 0
 --- !u!1 &598583911
 GameObject:
   m_ObjectHideFlags: 0
@@ -1501,7 +1519,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 888951466}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -303, y: 170, z: 0}
+  m_LocalPosition: {x: -297, y: 167, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 100315957}
@@ -1699,6 +1717,7 @@ GameObject:
   - component: {fileID: 1118214588}
   - component: {fileID: 1118214590}
   - component: {fileID: 1118214589}
+  - component: {fileID: 1118214591}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -1784,6 +1803,18 @@ MonoBehaviour:
   mSortingLayerName: 
   mClipOffset: {x: 0, y: 0}
   useSortingOrder: 0
+--- !u!114 &1118214591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1118214587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5018d800d4427fb45a92baaefaf70e0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointerButtonLifeBar: {fileID: 888951468}
 --- !u!1 &1148754445
 GameObject:
   m_ObjectHideFlags: 0
@@ -2349,7 +2380,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1425870566}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 122.00001, y: 87.00001, z: 0}
+  m_LocalPosition: {x: 122, y: 87, z: 0}
   m_LocalScale: {x: 1.00062, y: 1.00062, z: 1.00062}
   m_Children:
   - {fileID: 598583912}
@@ -2828,47 +2859,6 @@ MonoBehaviour:
   mMaxLineHeight: 0
   mLineWidth: 0
   mMultiline: 1
---- !u!1 &1663099029
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1663099031}
-  - component: {fileID: 1663099030}
-  m_Layer: 0
-  m_Name: UIPopupBarLifeController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1663099030
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1663099029}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5018d800d4427fb45a92baaefaf70e0d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pointerButtonLifeBar: {fileID: 888951468}
---- !u!4 &1663099031
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1663099029}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0930121, y: 0.027321467, z: 0.011085261}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1737237532
 GameObject:
   m_ObjectHideFlags: 0
