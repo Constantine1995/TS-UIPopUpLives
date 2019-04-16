@@ -47,38 +47,36 @@ public class UIPopupLives : Accessible<UIPopupLives>
         Init();
         if (pointerButtonClose != null)
         {
-            EventDelegate.Set(pointerButtonClose.onClick, delegate () { Close(); });
+            EventDelegate.Set(pointerButtonClose.onClick, Close);
         }
 
-        for (int i = 0; i < pointerButtonUseLife.Length; i++)
+        if (pointerButtonUseLife != null)
         {
-            if (pointerButtonUseLife != null)
+            for (int i = 0; i < pointerButtonUseLife.Length; i++)
             {
-                EventDelegate.Set(pointerButtonUseLife[i].onClick, delegate () { LoseLife(); });
+                EventDelegate.Set(pointerButtonUseLife[i].onClick, LoseLife);  
             }
         }
 
-        for (int i = 0; i < pointerButtonRefillLife.Length; i++)
+        if (pointerButtonUseLife != null)
         {
-            if (pointerButtonUseLife != null)
+            for (int i = 0; i < pointerButtonRefillLife.Length; i++)
             {
-                EventDelegate.Set(pointerButtonRefillLife[i].onClick, delegate () { RefillLife(); });
+                EventDelegate.Set(pointerButtonRefillLife[i].onClick, RefillLife);
             }
         }
 
         if (BackgroundFade != null)
         {
-            EventDelegate.Set(BackgroundFade.GetComponent<UIButton>().onClick, delegate () { ClickBackground(); });
+            EventDelegate.Set(BackgroundFade.GetComponent<UIButton>().onClick, ClickBackground);
         }
     }
   
-
     private void Update()
     {
         if (pointerTimeBarLabel != null)
         {
             SwichState();
-
         }
     }
 
@@ -242,18 +240,15 @@ public class UIPopupLives : Accessible<UIPopupLives>
     {
         if (currentTime <= 0)
         {
-            currentTime = Config.REFILL_LIFE_SECONDS;
             livesManager.RefillOneLife();
+            currentTime = Config.REFILL_LIFE_SECONDS;
         }
     }
 
     // Обновляет данные жизней
     private void UpdateLives()
     {
-        int countLives = livesManager.GetCurrentLives();
-        pointerAmountLifeBarLabel.text = countLives.ToString();
-
-        ChangeState();
+       
     }
 
     // Отнимает одну жизнь
@@ -273,7 +268,10 @@ public class UIPopupLives : Accessible<UIPopupLives>
 
     private void OnProfileChangeLives(int lives)
     {
-        UpdateLives();
+        //int countLives = livesManager.GetCurrentLives();
+        pointerAmountLifeBarLabel.text = lives.ToString();
+        ChangeState();
+        // UpdateLives();
     }
 
     private void OnEnable()
