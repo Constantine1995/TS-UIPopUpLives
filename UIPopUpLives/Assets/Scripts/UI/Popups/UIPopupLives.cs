@@ -45,7 +45,6 @@ public class UIPopupLives : Accessible<UIPopupLives>
     private void Start()
     {
         Init();
-
         if (pointerButtonClose != null)
         {
             EventDelegate.Set(pointerButtonClose.onClick, delegate () { Close(); });
@@ -72,6 +71,7 @@ public class UIPopupLives : Accessible<UIPopupLives>
             EventDelegate.Set(BackgroundFade.GetComponent<UIButton>().onClick, delegate () { ClickBackground(); });
         }
     }
+  
 
     private void Update()
     {
@@ -79,27 +79,35 @@ public class UIPopupLives : Accessible<UIPopupLives>
         {
             SwichState();
 
+        }
+    }
+
+    private void CustomTimer()
+    {
+        if (currentTime > 0)
+        {
+            currentTime--;
+
+            Invoke("CustomTimer", 1.0f);
+
             string timeText;
+            if (livesManager.CanRefillLives())
+            {
+                CheckRefillLifes();
 
-                if (livesManager.CanRefillLives())
-                {
-                    CheckRefillLifes();
+                // Используется в качестве заглушки, после 20 секунд, таймер обновляется до 0 секунд
+                minutes = Mathf.Floor((currentTime % 3600) / 60).ToString("00");
 
-                    currentTime -= 1 * Time.deltaTime;
+                seconds = (currentTime % 60).ToString("00");
 
-                    // Используется в качестве заглушки, после 20 секунд, таймер обновляется до 0 секунд
-                    minutes = Mathf.Floor((currentTime % 3600) / 60).ToString("00"); 
+                timeText = CustomFormatTime.formatTimeLive(minutes, seconds);
+            }
+            else
+            {
+                timeText = Config.TEXT_FULL_LIVES;
+            }
 
-                    seconds = (currentTime % 60).ToString("00");
-
-                    timeText = CustomFormatTime.formatTimeLive(minutes, seconds);
-                }
-                else
-                {
-                    timeText = Config.TEXT_FULL_LIVES;
-                }
-
-                pointerTimeBarLabel.text = timeText;
+            pointerTimeBarLabel.text = timeText;
         }
     }
 
@@ -109,13 +117,13 @@ public class UIPopupLives : Accessible<UIPopupLives>
         if (livesManager == null)
         {
             livesManager = new LivesManager();
-
         }
 
         SetCurrentState(PopUpState.UseLife);
         amountLives = livesManager.GetCurrentLives();
         pointerTimeBarLabel.text = currentTime.ToString();
         pointerAmountLifeBarLabel.text = amountLives.ToString();
+        CustomTimer();
     }
 
     private IEnumerator Process(bool isOpen)
@@ -148,7 +156,6 @@ public class UIPopupLives : Accessible<UIPopupLives>
 
     public void Show()
     {
-  
         pointerSwitcher.gameObject.SetActive(true);
         FadeBackground(0.5f);
         ChangeState();
