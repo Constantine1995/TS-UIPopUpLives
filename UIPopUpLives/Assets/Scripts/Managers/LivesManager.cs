@@ -1,7 +1,5 @@
-﻿using System;
-using UnityEngine.Events;
+﻿using UnityEngine.Events;
 
-[Serializable]
 public class LivesManager
 {
     public static UnityAction<int> OnProfileChangeLives = delegate { };

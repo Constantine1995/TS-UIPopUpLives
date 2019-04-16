@@ -38,7 +38,7 @@ public class UIPopupLives : Accessible<UIPopupLives>
     [SerializeField] private UIButton[] pointerButtonRefillLife = null;
 
     private int amountLives = 0;
-    private float currentTime = 0.0f;
+    private float currentTime = Config.REFILL_LIFE_SECONDS;
     private LivesManager livesManager;
     string minutes, seconds;
 
@@ -85,7 +85,7 @@ public class UIPopupLives : Accessible<UIPopupLives>
                 {
                     CheckRefillLifes();
 
-                    currentTime += 1 * Time.deltaTime;
+                    currentTime -= 1 * Time.deltaTime;
 
                     // Используется в качестве заглушки, после 20 секунд, таймер обновляется до 0 секунд
                     minutes = Mathf.Floor((currentTime % 3600) / 60).ToString("00"); 
@@ -200,7 +200,7 @@ public class UIPopupLives : Accessible<UIPopupLives>
 
             // Максимум жизней
             case PopUpState.UseLife:
-                currentTime = 0;
+                currentTime = Config.REFILL_LIFE_SECONDS;
                 pointerUseAmountLabel.text = countLives.ToString();
                 popUpsUseLife.gameObject.SetActive(true);
                 popUpsRefillLife.gameObject.SetActive(false);
@@ -233,9 +233,9 @@ public class UIPopupLives : Accessible<UIPopupLives>
     // Добавляем 1 жизнь каждые 20 секунд
     private void CheckRefillLifes()
     {
-        if (currentTime >= Config.REFILL_LIFE_SECONDS)
+        if (currentTime <= 0)
         {
-            currentTime = 0;
+            currentTime = Config.REFILL_LIFE_SECONDS;
             livesManager.RefillOneLife();
         }
     }
