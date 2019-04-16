@@ -39,7 +39,7 @@ public class UIPopupLives : Accessible<UIPopupLives>
 
     private int amountLives = 0;
     private float currentTime = 0.0f;
-
+    private LivesManager livesManager;
     string minutes, seconds;
 
     private void Start()
@@ -81,7 +81,7 @@ public class UIPopupLives : Accessible<UIPopupLives>
 
             string timeText;
 
-                if (LivesManager.Current.CanRefillLives())
+                if (livesManager.CanRefillLives())
                 {
                     CheckRefillLifes();
 
@@ -106,8 +106,14 @@ public class UIPopupLives : Accessible<UIPopupLives>
     // Инициализация данных
     private void Init()
     {
+        if (livesManager == null)
+        {
+            livesManager = new LivesManager();
+
+        }
+
         SetCurrentState(PopUpState.UseLife);
-        amountLives = LivesManager.Current.GetCurrentLives();
+        amountLives = livesManager.GetCurrentLives();
         pointerTimeBarLabel.text = currentTime.ToString();
         pointerAmountLifeBarLabel.text = amountLives.ToString();
     }
@@ -168,7 +174,7 @@ public class UIPopupLives : Accessible<UIPopupLives>
 
     private void SwichState()
     {
-       int countLives = LivesManager.Current.GetCurrentLives();
+       int countLives = livesManager.GetCurrentLives();
 
         switch (currentState)
         {
@@ -206,19 +212,19 @@ public class UIPopupLives : Accessible<UIPopupLives>
     private void ChangeState()
     {
         // Обычное состояние
-        if (LivesManager.Current.IsNormalState)
+        if (livesManager.IsNormalState)
         {
             SetCurrentState(PopUpState.UseRefillLife);
         }
 
         // Нету жизней
-        if (LivesManager.Current.IsNoLives)
+        if (livesManager.IsNoLives)
         {
             SetCurrentState(PopUpState.RefillLife);
         }
 
         // Максимум жизней
-        if (LivesManager.Current.IsFullLives)
+        if (livesManager.IsFullLives)
         {
             SetCurrentState(PopUpState.UseLife);
         }
@@ -230,14 +236,14 @@ public class UIPopupLives : Accessible<UIPopupLives>
         if (currentTime >= Config.REFILL_LIFE_SECONDS)
         {
             currentTime = 0;
-            LivesManager.Current.RefillOneLife();
+            livesManager.RefillOneLife();
         }
     }
 
     // Обновляет данные жизней
     private void UpdateLives()
     {
-        int countLives = LivesManager.Current.GetCurrentLives();
+        int countLives = livesManager.GetCurrentLives();
         pointerAmountLifeBarLabel.text = countLives.ToString();
 
         ChangeState();
@@ -246,16 +252,16 @@ public class UIPopupLives : Accessible<UIPopupLives>
     // Отнимает одну жизнь
     private void LoseLife()
     { 
-        if (LivesManager.Current.CanLoseLife())
+        if (livesManager.CanLoseLife())
         {
-            LivesManager.Current.LoseOneLife();
+            livesManager.LoseOneLife();
         }
     }
 
     // Восполнить все жизни
     private void RefillLife()
     {
-        LivesManager.Current.RefillAllLife();
+        livesManager.RefillAllLife();
     }
 
     private void OnProfileChangeLives(int lives)

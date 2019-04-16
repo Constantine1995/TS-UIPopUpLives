@@ -1,0 +1,18 @@
+﻿<Properties StartupConfiguration="{E2E948C6-D238-BF50-A3E9-10DC3BA33379}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Managers/LivesManager.cs">
+    <Files>
+      <File FileName="Assets/Scripts/Core/Patterns/Accessible.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Core/Patterns/Singleton.cs" Line="71" Column="3" />
+      <File FileName="Assets/Scripts/Core/CustomFormatTime.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/UI/Popups/UIPopupLives.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Managers/LivesManager.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

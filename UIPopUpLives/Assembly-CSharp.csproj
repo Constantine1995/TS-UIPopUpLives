@@ -173,6 +173,7 @@
     <Compile Include="Assets\Scripts\Config\Config.cs" />
     <Compile Include="Assets\Scripts\Core\CustomFormatTime.cs" />
     <Compile Include="Assets\Scripts\Core\Patterns\Accessible.cs" />
+    <Compile Include="Assets\Scripts\Core\Patterns\Singleton.cs" />
     <Compile Include="Assets\Scripts\Managers\LivesManager.cs" />
     <Compile Include="Assets\Scripts\UI\Popups\UIPopupBarLife.cs" />
     <Compile Include="Assets\Scripts\UI\Popups\UIPopupLives.cs" />

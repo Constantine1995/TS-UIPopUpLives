@@ -1,17 +1,13 @@
-﻿using UnityEngine.Events;
+﻿using System;
+using UnityEngine.Events;
 
-public class LivesManager : Accessible<LivesManager> {
-
+[Serializable]
+public class LivesManager
+{
     public static UnityAction<int> OnProfileChangeLives = delegate { };
 
-    private int currentLives;
+    public int currentLives = Config.MAX_LIVES;
 
-    private void Awake()
-    {
-        DontDestroyOnLoad(gameObject);
-        currentLives = Config.MAX_LIVES;
-    }
-    
     // Проверка на полные жизни
     public bool IsFullLives
     {
